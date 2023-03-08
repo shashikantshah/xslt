@@ -1,0 +1,38 @@
+<xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:js="http://example.com/js"
+                version="1.0">
+  <xsl:output method="xml" indent="yes"/>
+
+  <xsl:template match="/">
+    <html>
+      <head>
+        <title>Example page</title>
+        <script type="text/javascript">
+          <![CDATA[
+            window.onload = function() {
+              js:handleLoad();
+            }
+          ]]>
+        </script>
+      </head>
+      <body>
+        <h1>Example page</h1>
+        <p>The current date is: <xsl:value-of select="js:getCurrentDate()"/></p>
+      </body>
+    </html>
+  </xsl:template>
+
+  <xsl:script language="JavaScript" xmlns:js="http://example.com/js">
+    <![CDATA[
+      function getCurrentDate() {
+        var now = new Date();
+        return now.toISOString();
+      }
+      
+      function handleLoad() {
+        console.log("Page loaded!");
+      }
+    ]]>
+  </xsl:script>
+
+</xsl:stylesheet>
